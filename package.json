@@ -1,0 +1,23 @@
+{
+  "name": "js215",
+  "version": "1.0.0",
+  "description": "",
+  "main": "anagrams.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wor101/JS215.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wor101/JS215/issues"
+  },
+  "homepage": "https://github.com/wor101/JS215#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
