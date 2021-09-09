@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>your page title goes here</title>
+    <meta charset="utf-8"/>
+  </head>
+  <script src="https://dbdwvr6p7sskw.cloudfront.net/210/files/email_data_v2.js"></script>
+  <script>
+    function mailCount(emailData) {
+      let emails = emailData.split(/##\|\|##/);
+      let dates = emailData.match(/\d\d-\d\d-\d\d\d\d/g);
+      dates = dates.map(date => new Date(date));
+      let earliestDate;
+      let latestDate;
+
+      dates.forEach(date => {
+        if (date < earliestDate || earliestDate === undefined) {
+          earliestDate = date;
+        } 
+        if (date > latestDate || latestDate === undefined) {
+          latestDate = date;
+        }
+      });
+      console.log(`Count of Email: ${emails.length}`);
+      console.log(`Date Rang: ${earliestDate.toDateString()} - ${latestDate.toDateString()}`);
+    }
+    mailCount(emailData);
+  </script>
+</html>
