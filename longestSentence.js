@@ -1,5 +1,22 @@
 "use strict";
 
+function longestSentence(text) {
+  let sentences = text.match(/[a-z][^.!?]*[.!?]/ig)
+  let longest = getLongestSentence(sentences);
+  
+  console.log(longest + '\n');
+  console.log(`The longest sentence has ${getWordCount(longest)} words.`);
+}
+
+function getLongestSentence(sentences) {
+  let longToShort = sentences.sort((sent1, sent2) => getWordCount(sent2) - getWordCount(sent1));
+  return longToShort[0];
+}
+
+function getWordCount(sentence) {
+  return sentence.match(/[^ .!?]+/g).length;
+}
+
 let longText = 'Four score and seven years ago our fathers brought forth' +
   ' on this continent a new nation, conceived in liberty, and' +
   ' dedicated to the proposition that all men are created' +
@@ -30,24 +47,9 @@ let longText = 'Four score and seven years ago our fathers brought forth' +
   ' the people, for the people, shall not perish from the' +
   ' earth.';
 
-function longestSentence(text) {
-  let sentences = text.match(/[a-z][^.!?]*[.!?]/ig)
-  let longest = getLongestSentence(sentences);
-  
-  console.log(longest + '\n');
-  console.log(`The longest sentence has ${getWordCount(longest)} words.`);
-}
-
-function getLongestSentence(sentences) {
-  let longToShort = sentences.sort((sent1, sent2) => getWordCount(sent2) - getWordCount(sent1));
-  return longToShort[0];
-}
-
-function getWordCount(sentence) {
-  return sentence.match(/[^ .!?]+/g).length;
-}
-
 longestSentence(longText);
+
+
 
 // console output
 // It is rather for us to be here dedicated to the great task remaining before us -- that from these honored 
