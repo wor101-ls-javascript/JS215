@@ -51,101 +51,7 @@ getRange("545, 64:11")  //  545, 564, 565, .. 611
 - an array to split and hold each element of the input string
 - an array to add and hold our return range
 
-
 **Algorithm**
-- split input string on ', '
-- create empty array to hold our return range
-- iterate over our array of strings
-  - if our array includes ["-", ":", ".."] send to parseRange function along with the previous value
-    - function should return an array of numbers
-    - add each number to the return array
-  - else send previous value and current string to calculateValue function
-    - returns single integer
-    - add integer to the return array
-
-  ---ParseRange---
-  - Accepts "1:5:2" along with previous value
-    - split the string by ["-", ":", ".."] into an array
-    - create a paresedRange Array to hold return values
-    - iterate over array of intut strings 
-      - on first iteration, pass previous value along with current value to calculateValue function
-      - on subsequent passes, pass the last value in our return array along with current value to calculateValue function
-    - return the return array (DONT RETURN the previous value if you add it to the array)
-
-- return the return array
-*/
-
-// function getRange(inputString) {
-//   let stringArray = inputString.split(', ');
-//   let finalRange = [];
-  
-//   stringArray.forEach(str => {
-//     let previousValue = finalRange[finalRange.length - 1] || 0;
-//     if (str.match(/-|:|\.\./)) {      
-//       let subRange = parseRange(str, previousValue);
-//       subRange.forEach(num => finalRange.push(num));
-
-//     } else if (parseInt(str, 10) > previousValue) {
-//       finalRange.push(parseInt(str, 10));
-//     } else {
-//       finalRange.push(calculateValue(str, previousValue));
-//     }
-//   });
-//   console.log(finalRange);
-//   return finalRange;
-// }
-
-
-// function calculateValue(currentString, previousValue) {
-//   let newValue = parseInt(currentString, 10);
-//   let match = false;
-
-//   do {
-//     newValue += 1;
-//     let testLength = currentString.length * -1;
-//     let sliceOfNewValueString = String(newValue).slice(testLength);
-
-//     if (currentString === sliceOfNewValueString && newValue > previousValue) {
-//       match = true;
-//     }
-//   } while (match === false);
-//   return newValue;
-// }
-
-// function parseRange(rangeString, previousValue) {
-//   let rangeArray = [];
-
-//   let splitRange = rangeString.split((/-|:|\.\./));
-
-//   if (parseInt(splitRange[0], 10) > previousValue) {
-//     rangeArray.push(parseInt(splitRange[0], 10));
-//   } else {
-//     rangeArray.push(calculateValue(splitRange[0], previousValue));
-//   }
-
-//   splitRange.slice(1).forEach(strNum => {
-//     let lastValue = rangeArray[rangeArray.length - 1];
-
-//     rangeArray.push(calculateValue(strNum, lastValue));
-//   });
-//   console.log(rangeArray);
-
-//   rangeArray = fillOutArray(rangeArray);
-//   return rangeArray;
-// }
-
-// function fillOutArray(rangeArray) {
-//   let filledArray = [];
-//   for (let index = Math.min(...rangeArray); index < Math.max(...rangeArray); index += 1) {
-//     filledArray.push(index);
-//   }
-//   return filledArray;
-// }
-
-
-
-
-/* **Algorithm**
 CalculateNextInt
 -takes the previous # or 0, and the current # string
 - adds 1 to the previous number
@@ -196,7 +102,7 @@ function getRange(stringRange) {
     let previousInt = rangeArray[rangeArray.length -1] || 0;
     if (str.match(RANGE_DELIMITER)){
       let subRange = createRange(str, previousInt);
-      subRange.forEach(int => rangeArray.push(int));
+      rangeArray = rangeArray.concat(subRange);
     } else if (parseInt(str, 10) < previousInt) {
       rangeArray.push(calculateNextInt(str, previousInt));
     } else {
@@ -278,6 +184,7 @@ function fillRange(minMaxArray) {
 console.log(getRange("1, 3, 7, 2, 4, 1"));  // [1, 3, 7, 12, 14, 21]
 console.log(getRange("1-3, 1-2"));   // [1, 2, 3, 11, 12])
 console.log(getRange("1:5:2"));   //[1, 2, 3, 4, 5, 6, 7, 8 ,9, 10, 11, 12]);
+console.log(getRange("1-5:2"));   //[1, 2, 3, 4, 5, 6, 7, 8 ,9, 10, 11, 12]);
 console.log(getRange("104-2"));      //  104, 105, ... 112
 console.log(getRange("104-02"));     //  104, 105, ... 202
 console.log(getRange("545, 64:11"));  //  545, 564, 565, .. 611
