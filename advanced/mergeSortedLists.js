@@ -62,35 +62,14 @@ Understanding the Problem
 function merge(array1, array2) {
   let newArray = [];
   
-  if (array1.length === 0) {
-    console.log(array2);
-    return array2;
-  } else if (array2.length === 0) {
-    console.log(array1);
-    return array1;
+  let copy1 = array1.slice(0);
+  let copy2 = array2.slice(0);
+  
+  while (copy1.length > 0 && copy2.length > 0) {
+    newArray.push(copy1[0] <= copy2[0] ? copy1.shift() : copy2.shift());
   }
   
-  let secondArrayIndex = -1;
-  array1.forEach(num1 => {
-    let isLowestNum = true;
-    
-    do {
-     isLowestNum = true;
-     for (let index = 0; index < array2.length; index += 1) {
-        let num2 = array2[index];
-        if (num2 < num1 && index > secondArrayIndex) {
-          newArray.push(num2);
-          secondArrayIndex = index;
-          isLowestNum = false;
-        }
-      }  
-    } while (!isLowestNum)
-    
-    newArray.push(num1);  
-  });
-  
-  console.log(newArray);
-  return newArray;  
+  return newArray.concat(copy1.length === 0 ? copy2 : copy1);
 }
 
 
